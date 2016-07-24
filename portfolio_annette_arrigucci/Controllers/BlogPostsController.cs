@@ -37,6 +37,7 @@ namespace portfolio_annette_arrigucci.Controllers
 
         // GET: BlogPosts/Create
         [Authorize (Roles ="Admin")]
+
         public ActionResult Create()
         {
             return View();
@@ -51,6 +52,14 @@ namespace portfolio_annette_arrigucci.Controllers
         {
             if (ModelState.IsValid)
             {
+                blogPost.Created = DateTimeOffset.UtcNow;
+                if (blogPost.Body.Length < 100) {
+                    blogPost.Slug = blogPost.Body;
+                }
+                else
+                {
+                    blogPost.Slug = blogPost.Body.Substring(0, 100);
+                }
                 db.Posts.Add(blogPost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
