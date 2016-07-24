@@ -1,4 +1,12 @@
 ﻿<link href="~/css/page-top-padding-blog.css" rel="stylesheet">
+<link href="~/css/create-blog-style.css" rel="stylesheet">
+<script src="~/scripts/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+  tinymce.init({
+      selector: '#mytextarea',
+      height : 300
+  });
+</script>
 
 @model portfolio_annette_arrigucci.Models.BlogPost
 
@@ -6,7 +14,7 @@
     ViewBag.Title = "Create";
 }
 
-<section id="about">
+<section id="create-post">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center page-start">
@@ -15,7 +23,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-8 col-lg-offset-1">
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
@@ -57,7 +65,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", @id = "mytextarea"} })
                                 @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
                             </div>
                         </div>
