@@ -224,6 +224,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\create-blog-style.css" />
     <Content Include="css\exercises.css" />
     <Content Include="css\freelancer.css" />
     <Content Include="css\freelancer.min.css" />
@@ -518,6 +519,7 @@
     <Content Include="vendor\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="vendor\jquery\jquery.js" />
     <Content Include="vendor\jquery\jquery.min.js" />
+    <Content Include="Views\BlogPosts\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -598,7 +600,6 @@
     <Content Include="Views\BlogPosts\Delete.cshtml" />
     <Content Include="Views\BlogPosts\Details.cshtml" />
     <Content Include="Views\BlogPosts\Edit.cshtml" />
-    <Content Include="Views\BlogPosts\Index.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
@@ -614,6 +615,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\BlogPosts\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vscode\" />

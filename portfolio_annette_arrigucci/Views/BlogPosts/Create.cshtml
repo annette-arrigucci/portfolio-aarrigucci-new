@@ -1,12 +1,7 @@
 ﻿<link href="~/css/page-top-padding-blog.css" rel="stylesheet">
 <link href="~/css/create-blog-style.css" rel="stylesheet">
 <script src="~/scripts/tinymce/tinymce.min.js"></script>
-<script type="text/javascript">
-  tinymce.init({
-      selector: '#mytextarea',
-      height : 300
-  });
-</script>
+
 
 @model portfolio_annette_arrigucci.Models.BlogPost
 
@@ -105,4 +100,10 @@
 </section>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+      tinymce.init({
+      selector: '#mytextarea',
+      height : 300
+      });
+    </script>
 }
