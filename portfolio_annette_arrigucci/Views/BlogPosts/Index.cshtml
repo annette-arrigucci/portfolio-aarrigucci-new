@@ -1,4 +1,4 @@
-﻿<link href="~/css/page-top-padding-blog.css" rel="stylesheet">
+﻿<link href="~/css/page-top-padding.css" rel="stylesheet">
 <link href="~/css/blog-index-style.css" rel="stylesheet">
 
 @model IEnumerable<portfolio_annette_arrigucci.Models.BlogPost>
@@ -26,14 +26,15 @@
 
                 @foreach (var item in Model)
                 {
-                    <h3><a href="@Url.Action("Details", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Title)</a></h3>
+                    <h3><a href="@Url.Action("Details", new { id = item.Id })" class="blog-link">@Html.DisplayFor(modelItem => item.Title)</a></h3>
                     if(!string.IsNullOrEmpty(item.MediaURL)) {
                         <img src="@Html.DisplayFor(modelItem => item.MediaURL)" width="100">
                     }
                     <p>@Html.Raw(item.Slug)</p>
                     @*<p>@Html.DisplayFor(modelItem => item.Slug)</p>*@
                     @*<p><b>@Html.DisplayFor(modelItem => item.Created)</b></p>*@
-                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString()</b></p>
+                    @*<p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString()</b></p>*@
+                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created.DateTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"))</b></p>
                     <p>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |

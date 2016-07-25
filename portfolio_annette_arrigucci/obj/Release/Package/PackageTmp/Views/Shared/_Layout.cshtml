@@ -15,6 +15,7 @@
     <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,6 +47,9 @@
                         <a href="@Url.Action("Portfolio","Home")">Portfolio</a>
                     </li>
                     <li class="page-scroll">
+                        <a href="@Url.Action("Index","BlogPosts")">Blog</a>
+                    </li>
+                    <li class="page-scroll">
                         <a href="@Url.Action("Exercises","Home")">Exercises</a>
                     </li>
                     <li class="page-scroll">
@@ -55,6 +59,7 @@
                         <a href="@Url.Action("Contact","Home")">Contact</a>
                     </li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -134,5 +139,6 @@
     <script type="text/javascript">
         SyntaxHighlighter.all();
     </script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
