@@ -36,11 +36,13 @@ namespace portfolio_annette_arrigucci.Controllers
         }
 
         // GET: BlogPosts/Create
-        [Authorize (Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
 
         public ActionResult Create()
         {
-            return View();
+            BlogPost model = new BlogPost();
+            model.Created = DateTimeOffset.Now; //setting a value as a hidden input to the Create view
+            return View("Create", model);
         }
 
         // POST: BlogPosts/Create
@@ -52,13 +54,14 @@ namespace portfolio_annette_arrigucci.Controllers
         {
             if (ModelState.IsValid)
             {
-                blogPost.Created = DateTimeOffset.UtcNow;
-                if (blogPost.Body.Length < 100) {
+                //blogPost.Created = DateTimeOffset.Now;
+                if (blogPost.Body.Length < 500)
+                {
                     blogPost.Slug = blogPost.Body;
                 }
                 else
                 {
-                    blogPost.Slug = blogPost.Body.Substring(0, 100);
+                    blogPost.Slug = blogPost.Body.Substring(0, 500);
                 }
                 db.Posts.Add(blogPost);
                 db.SaveChanges();
@@ -69,6 +72,7 @@ namespace portfolio_annette_arrigucci.Controllers
         }
 
         // GET: BlogPosts/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,6 +104,7 @@ namespace portfolio_annette_arrigucci.Controllers
         }
 
         // GET: BlogPosts/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
