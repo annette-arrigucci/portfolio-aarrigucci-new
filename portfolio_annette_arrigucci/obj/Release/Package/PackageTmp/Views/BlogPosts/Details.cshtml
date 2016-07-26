@@ -23,10 +23,10 @@
                     <img src="@Html.DisplayFor(model => model.MediaURL)">
                 }
                 <p>@Html.Raw(Model.Body)</p>
-                <p class="date"><b>Created: @TimeZoneInfo.ConvertTime(Model.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString()</b></p>
+                <p class="date"><b>Created: @Model.Created.ToLocalTime().ToString("M/dd/yy h:mm tt")</b></p>
                 @if (Model.Updated != null)
                 {
-                    <p class="date"><b>Updated: @TimeZoneInfo.ConvertTime((DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString()</b></p>
+                    <p class="date"><b>Updated: @Model.Created.ToLocalTime().ToString("M/dd/yy h:mm tt")</b></p>
                 }
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
