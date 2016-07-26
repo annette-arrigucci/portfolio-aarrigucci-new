@@ -42,7 +42,7 @@ namespace portfolio_annette_arrigucci.Controllers
         public ActionResult Create()
         {
             BlogPost model = new BlogPost();
-            model.Created = DateTimeOffset.Now; //setting a value as a hidden input to the Create view
+            model.Created = DateTimeOffset.Now; //setting a value as a hidden input to the Create view, this is to prevent a null value when we do model binding
             return View("Create", model);
         }
 
@@ -55,7 +55,7 @@ namespace portfolio_annette_arrigucci.Controllers
         {
             if (ModelState.IsValid)
             {
-                //blogPost.Created = DateTimeOffset.Now;
+                blogPost.Created = DateTimeOffset.Now; //now we overwrite the Created property with the actual time of publication
                 if (blogPost.Body.Length < 500)
                 {
                     blogPost.Slug = blogPost.Body;
@@ -93,11 +93,21 @@ namespace portfolio_annette_arrigucci.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,Created,Title,Body,MediaURL,Published")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(blogPost).State = EntityState.Modified;
+                blogPost.Updated = DateTimeOffset.Now;
+                //updating the slug to reflect any changes to the Body
+                if (blogPost.Body.Length < 500)
+                {
+                    blogPost.Slug = blogPost.Body;
+                }
+                else
+                {
+                    blogPost.Slug = blogPost.Body.Substring(0, 500);
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
