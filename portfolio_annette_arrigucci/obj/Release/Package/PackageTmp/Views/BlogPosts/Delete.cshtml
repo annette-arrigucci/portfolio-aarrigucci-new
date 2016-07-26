@@ -1,80 +1,152 @@
-﻿@model portfolio_annette_arrigucci.Models.BlogPost
+﻿<link href="~/css/page-top-padding.css" rel="stylesheet">
+<link href="~/css/form-style.css" rel="stylesheet">
+<link href="~/css/blog-delete-style.css" rel="stylesheet">
+
+@model portfolio_annette_arrigucci.Models.BlogPost
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>BlogPost</h4>
-    <hr />
+<section id="blog-delete">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center page-start">
+                <h2>Delete Post</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Created)
+            <p>@Html.DisplayNameFor(model => model.Title)</p>
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Created)
+            <p>@Html.DisplayFor(model => model.Title)</p>
+        </dd>
+
+        @if (!string.IsNullOrEmpty(Model.MediaURL))
+        {
+            <dt>
+                <p>@Html.DisplayNameFor(model => model.MediaURL)</p>
+            </dt>
+            <dd>
+                <p>@Html.DisplayFor(model => model.MediaURL)</p>
+            </dd>
+        }
+
+        <dt>
+            <p>@Html.DisplayNameFor(model => model.Created)</p>
+        </dt>
+        <dd>
+            <p>@TimeZoneInfo.ConvertTime(Model.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</p>
+        </dd>
+
+        @if (Model.Updated != null)
+        {
+            <dt>
+                <p>@Html.DisplayNameFor(model => model.Updated)</p>
+            </dt>
+            <dd>
+                <p>@TimeZoneInfo.ConvertTime((DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</p>
+            </dd>
+        }
+
+        <dt>
+            <p>@Html.DisplayNameFor(model => model.Body)</p>
+        </dt>
+        <dd>
+            @Html.Raw(Model.Body)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Updated)
+            <p>@Html.DisplayNameFor(model => model.Published)</p>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Updated)
+            <p>@Html.DisplayFor(model => model.Published)</p>
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MediaURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MediaURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Published)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Published)
-        </dd>
-
     </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+    @*<h3>Are you sure you want to delete this?</h3>
+        <div>
+            <h4>BlogPost</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+                <dd>
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Updated)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Updated)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Slug)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Slug)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Body)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Body)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MediaURL)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MediaURL)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Published)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Published)
+                </dd>
+
+            </dl>*@
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+          <div class="form-group">
+              <div class="col-md-offset-3 col-md-9 no-color">
+                <div class="form-actions">
+                    <input type="submit" value="Confirm Delete" class="btn btn-default" />
+                </div>
+              </div>
+          </div>
     }
-</div>
+                <div>
+                  @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

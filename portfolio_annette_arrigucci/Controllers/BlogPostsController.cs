@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using portfolio_annette_arrigucci.Models;
+using System.IO;
 
 namespace portfolio_annette_arrigucci.Controllers
 {
@@ -51,8 +52,15 @@ namespace portfolio_annette_arrigucci.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
+            if (image != null && image.ContentLength > 0)
+            {  //check the file name to make sure its an image                 
+                var ext = Path.GetExtension(image.FileName).ToLower();
+                if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".gif" && ext != ".bmp") 
+                ModelState.AddModelError("image", "Invalid Format.");
+            }
+
             if (ModelState.IsValid)
             {
                 blogPost.Created = DateTimeOffset.Now; //now we overwrite the Created property with the actual time of publication
@@ -64,11 +72,18 @@ namespace portfolio_annette_arrigucci.Controllers
                 {
                     blogPost.Slug = blogPost.Body.Substring(0, 500);
                 }
+
+                if (image != null)
+                {                          
+                    var filePath = "/Uploads/";      //relative server path  - to where my machine is                   
+                    var absPath = Server.MapPath("~" + filePath);    // path on physical drive on server                      
+                    blogPost.MediaURL = filePath + image.FileName;    // media url for relative path                         
+                    image.SaveAs(Path.Combine(absPath, image.FileName)); //save image
+                }
                 db.Posts.Add(blogPost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(blogPost);
         }
 
@@ -93,8 +108,14 @@ namespace portfolio_annette_arrigucci.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Title,Body,MediaURL,Published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,Created,Title,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
+            if (image != null && image.ContentLength > 0)
+            {  //check the file name to make sure its an image                 
+                var ext = Path.GetExtension(image.FileName).ToLower();
+                if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".gif" && ext != ".bmp")
+                    ModelState.AddModelError("image", "Invalid Format.");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(blogPost).State = EntityState.Modified;
@@ -107,6 +128,13 @@ namespace portfolio_annette_arrigucci.Controllers
                 else
                 {
                     blogPost.Slug = blogPost.Body.Substring(0, 500);
+                }
+                if (image != null)
+                {
+                    var filePath = "/Uploads/";      //relative server path  - to where my machine is                   
+                    var absPath = Server.MapPath("~" + filePath);    // path on physical drive on server                      
+                    blogPost.MediaURL = filePath + image.FileName;    // media url for relative path                         
+                    image.SaveAs(Path.Combine(absPath, image.FileName)); //save image
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");

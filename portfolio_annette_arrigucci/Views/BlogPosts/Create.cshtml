@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-1">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("Create", "BlogPosts", FormMethod.Post, new { enctype = "Multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -68,8 +68,10 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.MediaURL, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
+                                @*@Html.EditorFor(model => model.MediaURL, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })*@
+                                <input name="image" type="file" class="form-control" id="fileUpload" /> 
+                                <!--this input creates a way to upload an image file-->
                             </div>
                         </div>
 

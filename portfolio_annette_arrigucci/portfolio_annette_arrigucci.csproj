@@ -624,6 +624,7 @@
     <Folder Include=".vscode\" />
     <Folder Include="App_Data\" />
     <Folder Include="mail\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
