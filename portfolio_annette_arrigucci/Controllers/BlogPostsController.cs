@@ -17,7 +17,8 @@ namespace portfolio_annette_arrigucci.Controllers
         // GET: BlogPosts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            var newPost = db.Posts.OrderByDescending(p => p.Created).ToList();
+            return View(newPost);
         }
 
         // GET: BlogPosts/Details/5
