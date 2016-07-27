@@ -22,24 +22,38 @@ namespace portfolio_annette_arrigucci.Controllers
             return View(newPost);
         }
 
-        // GET: BlogPosts/Details/5
-        public ActionResult Details(int? id)
+        // GET: BlogPosts/Details/5 - returns the Details view using the ID number
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    BlogPost blogPost = db.Posts.Find(id);
+        //    if (blogPost == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(blogPost);
+        //}
+
+        //GET: BlogPosts/Details/{slug} - returns the Details view using the Slug
+        public ActionResult Details(string Slug)
         {
-            if (id == null)
+            if (String.IsNullOrWhiteSpace(Slug))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogPost blogPost = db.Posts.Find(id);
-            if (blogPost == null)
+            BlogPost post = db.Posts.FirstOrDefault(p => p.Slug == Slug);
+            if (post == null)
             {
                 return HttpNotFound();
             }
-            return View(blogPost);
+            return View(post);
         }
 
         // GET: BlogPosts/Create
         [Authorize(Roles = "Admin")]
-
         public ActionResult Create()
         {
             BlogPost model = new BlogPost();
@@ -52,7 +66,7 @@ namespace portfolio_annette_arrigucci.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Preview,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (image != null && image.ContentLength > 0)
             {  //check the file name to make sure its an image                 
@@ -64,13 +78,15 @@ namespace portfolio_annette_arrigucci.Controllers
             if (ModelState.IsValid)
             {
                 blogPost.Created = DateTimeOffset.Now; //now we overwrite the Created property with the actual time of publication
+
+                //create the blog post preview for the index page
                 if (blogPost.Body.Length < 500)
                 {
-                    blogPost.Slug = blogPost.Body;
+                    blogPost.Preview = blogPost.Body;
                 }
                 else
                 {
-                    blogPost.Slug = blogPost.Body.Substring(0, 500);
+                    blogPost.Preview = blogPost.Body.Substring(0, 500) + "...";
                 }
 
                 if (image != null)
@@ -80,6 +96,20 @@ namespace portfolio_annette_arrigucci.Controllers
                     blogPost.MediaURL = filePath + image.FileName;    // media url for relative path                         
                     image.SaveAs(Path.Combine(absPath, image.FileName)); //save image
                 }
+                //create the slug for the friendly URL
+                var Slug = StringUtilities.URLFriendly(blogPost.Title);
+                if (String.IsNullOrWhiteSpace(Slug))
+                {
+                    ModelState.AddModelError("Title", "Invalid title");
+                    return View(blogPost);
+                }
+                if(db.Posts.Any(p => p.Slug == Slug))
+                {
+                    ModelState.AddModelError("Title", "Title must be unique");
+                    return View(blogPost);
+                }
+                blogPost.Slug = Slug;
+
                 db.Posts.Add(blogPost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -88,19 +118,35 @@ namespace portfolio_annette_arrigucci.Controllers
         }
 
         // GET: BlogPosts/Edit/5
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    BlogPost blogPost = db.Posts.Find(id);
+        //    if (blogPost == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(blogPost);
+        //}
+
+
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string Slug)
         {
-            if (id == null)
+            if (String.IsNullOrWhiteSpace(Slug))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogPost blogPost = db.Posts.Find(id);
-            if (blogPost == null)
+            BlogPost post = db.Posts.FirstOrDefault(p => p.Slug == Slug);
+            if (post == null)
             {
                 return HttpNotFound();
             }
-            return View(blogPost);
+            return View(post);
         }
 
         // POST: BlogPosts/Edit/5
@@ -108,7 +154,7 @@ namespace portfolio_annette_arrigucci.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Title,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "Id,Created,Title,Body,Slug,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (image != null && image.ContentLength > 0)
             {  //check the file name to make sure its an image                 
@@ -120,14 +166,14 @@ namespace portfolio_annette_arrigucci.Controllers
             {
                 db.Entry(blogPost).State = EntityState.Modified;
                 blogPost.Updated = DateTimeOffset.Now;
-                //updating the slug to reflect any changes to the Body
+                //updating the preview to reflect any changes to the Body
                 if (blogPost.Body.Length < 500)
                 {
-                    blogPost.Slug = blogPost.Body;
+                    blogPost.Preview = blogPost.Body;
                 }
                 else
                 {
-                    blogPost.Slug = blogPost.Body.Substring(0, 500);
+                    blogPost.Preview = blogPost.Body.Substring(0, 500) + "...";
                 }
                 if (image != null)
                 {
@@ -136,6 +182,7 @@ namespace portfolio_annette_arrigucci.Controllers
                     blogPost.MediaURL = filePath + image.FileName;    // media url for relative path                         
                     image.SaveAs(Path.Combine(absPath, image.FileName)); //save image
                 }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -29,7 +29,7 @@
                     <p class="date"><b>Updated: @TimeZoneInfo.ConvertTime((DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
                 }
                 <p>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }) |
                     @Html.ActionLink("Back to List", "Index")
                 </p>
             </div>

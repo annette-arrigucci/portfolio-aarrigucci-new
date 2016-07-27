@@ -19,6 +19,7 @@ namespace portfolio_annette_arrigucci.Models
         [StringLength(160)]
         public string Title { get; set; }
         public string Slug { get; set; }
+        public string Preview { get; set; }
         [Required(ErrorMessage = "Body cannot be empty")]
         [AllowHtml]
         public string Body { get; set; }
