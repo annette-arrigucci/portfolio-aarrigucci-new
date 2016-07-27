@@ -14,16 +14,16 @@ namespace portfolio_annette_arrigucci
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "NewSlug",
+                url: "Blog/{slug}", //don't name this after a controller that already exists
+                defaults: new { controller = "BlogPosts", action = "Details", slug = UrlParameter.Optional }
             );
 
             routes.MapRoute(
-                name: "NewSlug", 
-                url: "Blog/{slug}", 
-                defaults: new { controller = "BlogPosts", action = "Details", slug = UrlParameter.Optional }
-            );
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );            
         }
     }
 }
