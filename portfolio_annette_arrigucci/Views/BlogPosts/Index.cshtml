@@ -40,7 +40,7 @@
                     <p>
                         @Html.ActionLink("Edit", "Edit", new { slug = item.Slug }) |
                         @Html.ActionLink("Details", "Details", new { slug = item.Slug }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { slug = item.Slug })
                     </p>
                     }
 

@@ -190,27 +190,54 @@ namespace portfolio_annette_arrigucci.Controllers
         }
 
         // GET: BlogPosts/Delete/5
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    BlogPost blogPost = db.Posts.Find(id);
+        //    if (blogPost == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(blogPost);
+        //}
+
+        //GET: BlogPosts/Delete/{slug}
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string Slug)
         {
-            if (id == null)
+            if (String.IsNullOrWhiteSpace(Slug))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogPost blogPost = db.Posts.Find(id);
-            if (blogPost == null)
+            BlogPost post = db.Posts.FirstOrDefault(p => p.Slug == Slug);
+            if (post == null)
             {
                 return HttpNotFound();
             }
-            return View(blogPost);
+            return View(post);
         }
 
         // POST: BlogPosts/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    BlogPost blogPost = db.Posts.Find(id);
+        //    db.Posts.Remove(blogPost);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
+        // POST: BlogPosts/Delete/{slug}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string Slug)
         {
-            BlogPost blogPost = db.Posts.Find(id);
+            BlogPost blogPost = db.Posts.FirstOrDefault(p => p.Slug == Slug);
             db.Posts.Remove(blogPost);
             db.SaveChanges();
             return RedirectToAction("Index");
