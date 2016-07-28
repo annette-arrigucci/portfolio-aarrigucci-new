@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using portfolio_annette_arrigucci.Models;
+using Microsoft.AspNet.Identity;
 
 namespace portfolio_annette_arrigucci.Controllers
 {
@@ -37,11 +38,15 @@ namespace portfolio_annette_arrigucci.Controllers
         }
 
         // GET: Comments/Create
+        [Authorize]
         public ActionResult Create()
         {
             //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
-            return View();
+            //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
+            Comment model = new Comment();
+            model.AuthorId = User.Identity.GetUserId();
+            model.Created = DateTimeOffset.Now;
+            return View(model);
         }
 
         // POST: Comments/Create
@@ -57,9 +62,8 @@ namespace portfolio_annette_arrigucci.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
+            //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
             return View(comment);
         }
 

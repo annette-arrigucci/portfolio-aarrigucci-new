@@ -28,6 +28,7 @@
                 {
                     <p class="date"><b>Updated: @TimeZoneInfo.ConvertTime((DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
                 }
+                @Html.Partial("_AddComment")
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }) |
                     @Html.ActionLink("Back to List", "Index")

@@ -1,7 +1,12 @@
 ﻿<link href="~/css/page-top-padding.css" rel="stylesheet">
 <link href="~/css/blog-index-style.css" rel="stylesheet">
+<link href="~/Content/PagedList.css" rel="stylesheet">
 
-@model IEnumerable<portfolio_annette_arrigucci.Models.BlogPost>
+@using PagedList;
+@using PagedList.Mvc;
+
+@*@model IEnumerable<portfolio_annette_arrigucci.Models.BlogPost>*@
+@model IPagedList<portfolio_annette_arrigucci.Models.BlogPost>
 
 @{
     ViewBag.Title = "Index";
@@ -16,94 +21,29 @@
             </div>
         </div>
 
-        
-
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
 
-    @foreach (var item in Model)
-    {
-        <h3><a href="@Url.Action("Details", new {slug = item.Slug})" class="blog-link">@Html.DisplayFor(modelItem => item.Title)</a></h3>
-        if (!string.IsNullOrEmpty(item.MediaURL))
-        {
-            <img src="@Html.DisplayFor(modelItem => item.MediaURL)" width="100">
-        }
-        <p>@Html.Raw(item.Preview)</p>
-                    @*<p>@Html.DisplayFor(modelItem => item.Slug)</p>*@
-                    @*<p><b>@Html.DisplayFor(modelItem => item.Created)</b></p>*@
-                    @*<p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString()</b></p>*@
-                    @*<p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created.DateTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"))</b></p>*@
-                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
-                    <p>
-                        @Html.ActionLink("Edit", "Edit", new { slug = item.Slug }) |
-                        @Html.ActionLink("Details", "Details", new { slug = item.Slug }) |
-                        @Html.ActionLink("Delete", "Delete", new { slug = item.Slug })
-                    </p>
-                    }
-
-                    @*<table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Created)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Updated)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Title)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Slug)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Body)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.MediaURL)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Published)
-                                </th>
-                                <th></th>
-                            </tr>
-
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Created)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Updated)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Title)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Slug)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Body)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MediaURL)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Published)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                    </td>
-                                </tr>
-                            }
-
-                        </table>*@
-                </div>
+            @foreach (var item in Model)
+            {
+                <h3><a href="@Url.Action("Details", new {slug = item.Slug})" class="blog-link">@Html.DisplayFor(modelItem => item.Title)</a></h3>
+                if (!string.IsNullOrEmpty(item.MediaURL))
+                {
+                    <img src="@Html.DisplayFor(modelItem => item.MediaURL)" width="100">
+                }
+                <p>@Html.Raw(item.Preview)</p>
+                <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+                <p> 
+                    @Html.ActionLink("Edit", "Edit", new { slug = item.Slug }) |
+                    @Html.ActionLink("Details", "Details", new { slug = item.Slug }) |
+                    @Html.ActionLink("Delete", "Delete", new { slug = item.Slug })
+                </p>
+            }
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+           </div>
         </div>
     </div>
 </section>

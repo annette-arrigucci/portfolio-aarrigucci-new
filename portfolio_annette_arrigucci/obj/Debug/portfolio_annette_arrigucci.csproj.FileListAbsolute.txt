@@ -330,3 +330,7 @@ C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\Microso
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\obj\Debug\portfolio_annette_arrigucci.csprojResolveAssemblyReference.cache
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\obj\Debug\portfolio_annette_arrigucci.dll
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\obj\Debug\portfolio_annette_arrigucci.pdb
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\PagedList.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\PagedList.Mvc.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\PagedList.xml
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\PagedList.Mvc.xml

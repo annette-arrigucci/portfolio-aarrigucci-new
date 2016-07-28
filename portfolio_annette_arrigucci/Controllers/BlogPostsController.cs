@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using portfolio_annette_arrigucci.Models;
 using System.IO;
+using PagedList;
+using PagedList.Mvc;
 
 namespace portfolio_annette_arrigucci.Controllers
 {
@@ -16,9 +18,11 @@ namespace portfolio_annette_arrigucci.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var newPost = db.Posts.OrderByDescending(p => p.Created).ToList();
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            var newPost = db.Posts.Where(r => r.Published == true).OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize);
             return View(newPost);
         }
 
