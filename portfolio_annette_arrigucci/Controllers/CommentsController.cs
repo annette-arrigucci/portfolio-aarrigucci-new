@@ -37,27 +37,30 @@ namespace portfolio_annette_arrigucci.Controllers
             return View(comment);
         }
 
-        // GET: Comments/Create
-        [Authorize]
-        public ActionResult Create()
-        {
-            //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
-            //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
-            Comment model = new Comment();
-            model.AuthorId = User.Identity.GetUserId();
-            model.Created = DateTimeOffset.Now;
-            return View(model);
-        }
+        //// GET: Comments/Create
+        //public ActionResult Create()
+        //{
+        //    //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
+        //    //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
+        //    Comment model = new Comment();
+        //    //model.PostId = postId;
+        //    model.AuthorId = User.Identity.GetUserId();
+        //    model.Created = DateTimeOffset.Now;
+        //    return View(model);
+        //}
 
         // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,PostId,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+                comment.AuthorId = User.Identity.GetUserId();
+                comment.Created = DateTimeOffset.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
