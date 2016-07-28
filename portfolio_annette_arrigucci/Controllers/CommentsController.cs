@@ -59,6 +59,7 @@ namespace portfolio_annette_arrigucci.Controllers
         {
             if (ModelState.IsValid)
             {
+                //if(User.IsInRole(MyRole)
                 comment.AuthorId = User.Identity.GetUserId();
                 comment.Created = DateTimeOffset.Now;
                 db.Comments.Add(comment);

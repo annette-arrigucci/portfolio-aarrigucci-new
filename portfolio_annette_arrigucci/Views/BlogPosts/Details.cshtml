@@ -33,6 +33,7 @@
                 {
                     <p class="date"><b>Updated: @TimeZoneInfo.ConvertTime((DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
                 }
+                @Html.Partial("_ShowComments", (IEnumerable<portfolio_annette_arrigucci.Models.Comment>) Model.Comments)
                 @Html.Partial("_AddComment", myCommentModel)
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }) |
