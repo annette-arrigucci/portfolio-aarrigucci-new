@@ -66,8 +66,6 @@ namespace portfolio_annette_arrigucci.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Details","BlogPosts", new { Slug = comment.PostSlug });
             }
-            //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
-            //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
             return View(comment);
         }
 

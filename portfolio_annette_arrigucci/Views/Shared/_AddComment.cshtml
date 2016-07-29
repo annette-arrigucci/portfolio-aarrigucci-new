@@ -1,5 +1,8 @@
 ﻿@model portfolio_annette_arrigucci.Models.Comment
-<link href="~/css/blog-details-style.css" rel="stylesheet">
+
+@section AddToHead{
+    <link href="@Url.Content("~/css/blog-details-style.css")" rel="stylesheet" type="text/css" />
+}
 
 <div class="row">
     <h3>Create Comment</h3>
@@ -17,7 +20,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-8">
-                    <textarea data-val="true" data-val-required="Body cannot be empty" id="Body" name="Body" class="form-control commentTextArea" rows="4"></textarea>
+                    <!---Added a hard-coded input here to fix styling of the textarea - width is set by form-control class to 100%-->
+                    <textarea data-val="true" data-val-required="Body cannot be empty" id="Body" name="Body" class="form-control" rows="4"></textarea>
                     @*@Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control commentTextArea"} })*@
                     @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
                 </div>
