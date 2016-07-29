@@ -57,6 +57,11 @@ namespace portfolio_annette_arrigucci.Controllers
         [Authorize]
         public ActionResult Create([Bind(Include = "Id,PostId,PostSlug,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
         {
+            if (string.IsNullOrEmpty(comment.Body))
+            {  //check the file name to make sure its an image                 
+                ModelState.AddModelError("Body", "Body is empty");
+            }
+
             if (ModelState.IsValid)
             {
                 //if(User.IsInRole(MyRole)
@@ -66,7 +71,9 @@ namespace portfolio_annette_arrigucci.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Details","BlogPosts", new { Slug = comment.PostSlug });
             }
-            return View(comment);
+            //looks like validation not working on Partial Views, so if body is empty, I'm adding an error. 
+            //Then if ModelState isn't valid, I'm redirecting to Details page using the PostSlug that was set in a hidden field
+            return RedirectToAction("Details", "BlogPosts", new { Slug = comment.PostSlug });
         }
 
         // GET: Comments/Edit/5
@@ -82,7 +89,7 @@ namespace portfolio_annette_arrigucci.Controllers
                 return HttpNotFound();
             }
             //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
+            //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);            
             return View(comment);
         }
 
@@ -91,16 +98,17 @@ namespace portfolio_annette_arrigucci.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PostId,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,PostId,PostSlug,AuthorId,Body,Created,UpdateReason")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+                comment.Updated = DateTimeOffset.Now;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BlogPosts", new { Slug = comment.PostSlug });
             }
             //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
+            //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
             return View(comment);
         }
 

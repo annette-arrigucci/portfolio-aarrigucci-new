@@ -21,8 +21,8 @@
                 @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-8">
                     <!---Added a hard-coded input here to fix styling of the textarea - width is set by form-control class to 100%-->
-                    <textarea data-val="true" data-val-required="Body cannot be empty" id="Body" name="Body" class="form-control" rows="4"></textarea>
-                    @*@Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control commentTextArea"} })*@
+                    @*<textarea data-val="true" data-val-required="Body cannot be empty" id="Body" name="Body" class="form-control" rows="4"></textarea>*@
+                    @Html.TextAreaFor(model => model.Body, new { @class = "form-control", @rows = "4" } )
                     @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
                 </div>
             </div>
