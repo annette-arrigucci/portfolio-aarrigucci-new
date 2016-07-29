@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<portfolio_annette_arrigucci.Models.Comment>
 
-<section id="show-comments">
-      <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                @foreach (var item in Model)
-                {
-                    <p>@Html.Raw(item.Body)</p>
-                    if(!string.IsNullOrEmpty(item.AuthorId)) {
-                        <p>Posted by @item.Author.FirstName&nbsp;@item.Author.LastName</p>
-                    }
-                    <p class="date"><b>Posted at @TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
-                }
-            </div>
-        </div>
-</section>
+<div id="show-comments">
+    <h3>Comments</h3>
+    @foreach (var item in Model)
+    {
+        <p>@Html.Raw(item.Body)</p>
+        if(!string.IsNullOrEmpty(item.AuthorId)) {
+            <p>Posted by @item.Author.FirstName&nbsp;@item.Author.LastName</p>
+        }
+        <p class="date"><b>Posted @TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+    }
+</div>
+        

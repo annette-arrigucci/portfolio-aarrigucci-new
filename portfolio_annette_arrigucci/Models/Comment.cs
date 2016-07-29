@@ -8,6 +8,7 @@ namespace portfolio_annette_arrigucci.Models
     {
         public int Id { get; set; }
         public int PostId { get; set; }
+        public string PostSlug { get; set; }
         public string AuthorId { get; set; }
 
         [Required(ErrorMessage = "Body cannot be empty")]

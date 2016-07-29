@@ -55,7 +55,7 @@ namespace portfolio_annette_arrigucci.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Id,PostId,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
+        public ActionResult Create([Bind(Include = "Id,PostId,PostSlug,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace portfolio_annette_arrigucci.Controllers
                 comment.Created = DateTimeOffset.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","BlogPosts", new { Slug = comment.PostSlug });
             }
             //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
             //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);

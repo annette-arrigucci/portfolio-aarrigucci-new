@@ -9,7 +9,7 @@
     ViewBag.postId = Model.Id;
     var myCommentModel = new Comment();
     myCommentModel.PostId = Model.Id;
-
+    myCommentModel.PostSlug = Model.Slug;
 }
 
 <section id="blog-detail">
