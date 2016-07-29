@@ -6,9 +6,10 @@
     {
         <p>@Html.Raw(item.Body)</p>
         if(!string.IsNullOrEmpty(item.AuthorId)) {
-            <p>Posted by @item.Author.FirstName&nbsp;@item.Author.LastName</p>
+            <p><b>Posted by @item.Author.FirstName&nbsp;@item.Author.LastName</b></p>
         }
-        <p class="date"><b>Posted @TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+        <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+        <br /><br />    
     }
 </div>
         
