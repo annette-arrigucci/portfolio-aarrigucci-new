@@ -633,6 +633,7 @@
     <Content Include="Views\BlogPosts\AdminIndex.cshtml" />
     <Content Include="Views\Shared\_AddComment.cshtml" />
     <Content Include="Views\Shared\_ShowComments.cshtml" />
+    <Content Include="Views\BlogPosts\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vscode\" />

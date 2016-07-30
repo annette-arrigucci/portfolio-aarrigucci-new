@@ -121,6 +121,35 @@ namespace portfolio_annette_arrigucci.Controllers
             return View(blogPost);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string searchStr, int? page)
+        {
+            if (string.IsNullOrEmpty(searchStr))
+            {
+                ModelState.AddModelError("Search term", "No search term entered");
+            }
+            if (ModelState.IsValid)
+            {
+                var results = db.Posts.Where(p => p.Body.Contains(searchStr))
+                    .Union(db.Posts.Where(p => p.Title.Contains(searchStr)))
+                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Body.Contains(searchStr))))
+                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Author.DisplayName.Contains(searchStr))))
+                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Author.FirstName.Contains(searchStr))))
+                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Author.LastName.Contains(searchStr))))
+                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Author.UserName.Contains(searchStr))))
+                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Author.Email.Contains(searchStr))))
+                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.UpdateReason.Contains(searchStr))));
+
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+
+                return View(results.Where(r => r.Published == true).OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+            }
+            return RedirectToAction("Index");
+        }
+
+
         // GET: BlogPosts/Edit/5
         //[Authorize(Roles = "Admin")]
         //public ActionResult Edit(int? id)
