@@ -9,6 +9,13 @@
             <p><b>Posted by @item.Author.FirstName&nbsp;@item.Author.LastName</b></p>
         }
         <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+        if (User.IsInRole("Moderator") || User.IsInRole("Admin"))
+        {
+            <p>
+                @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id}, null) |
+                @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id }, null)
+            </p>
+        }
         <br /><br />    
     }
 </div>
