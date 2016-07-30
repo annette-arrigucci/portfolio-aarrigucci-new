@@ -237,6 +237,7 @@
     <Content Include="css\blog-delete-style.css" />
     <Content Include="css\blog-details-style.css" />
     <Content Include="css\blog-index-style.css" />
+    <Content Include="css\edit-comment-style.css" />
     <Content Include="css\exercises.css" />
     <Content Include="css\form-style.css" />
     <Content Include="css\freelancer.css" />

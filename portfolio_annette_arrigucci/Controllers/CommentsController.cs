@@ -77,6 +77,7 @@ namespace portfolio_annette_arrigucci.Controllers
         }
 
         // GET: Comments/Edit/5
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -109,10 +110,14 @@ namespace portfolio_annette_arrigucci.Controllers
             }
             //ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
             //ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            return View(comment);
+            //return View(comment);
+            //redirecting user to "Edit" get Action so it brings in the Author virtual field from the database
+            //otherwise, the Author object that gets the author name is null
+            return RedirectToAction("Edit", "Comments", new { id = comment.Id }); 
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
