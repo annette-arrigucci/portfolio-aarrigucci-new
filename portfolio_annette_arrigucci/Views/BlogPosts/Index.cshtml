@@ -5,7 +5,6 @@
 @using PagedList;
 @using PagedList.Mvc;
 
-@*@model IEnumerable<portfolio_annette_arrigucci.Models.BlogPost>*@
 @model IPagedList<portfolio_annette_arrigucci.Models.BlogPost>
 
 @{
@@ -22,28 +21,33 @@
         </div>
 
         <div class="row">
-            
-            @if(User.IsInRole("Admin"))
+
+            @if (User.IsInRole("Admin"))
             {
-                <div class="col-lg-4 col-lg-offset-2">
+                <div class="col-lg-5 col-lg-offset-2">
                     <p>
                         @Html.ActionLink("Create New", "Create")
                     </p>
                 </div>
             }
-               
+            else
+            {
+                //if user is not an admin, show spacer instead of Create link 
+                <div class="col-lg-5 col-lg-offset-2"></div>
+            }
+
             @using (Html.BeginForm("Search", "BlogPosts", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input name="searchStr" type="text" class="form-control" id="searchStr" />
                 </div>
                 <div class="col-lg-1">
                     <input type="submit" value="Search" class="btn btn-default" />
                 </div>
-            }        
+            }
         </div>
-        </div>
+
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 @foreach (var item in Model)
@@ -54,9 +58,9 @@
                         <img src="@Html.DisplayFor(modelItem => item.MediaURL)" width="100">
                     }
                     <p>@Html.Raw(item.Preview)</p>
-                        <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
                         <p>
-                            @Html.ActionLink("Details", "Details", new { slug = item.Slug }) 
+                            @Html.ActionLink("Details", "Details", new { slug = item.Slug })
                             @if (User.IsInRole("Admin"))
                             {
                                 @Html.Raw(" | ")
@@ -68,6 +72,6 @@
                 }
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
-
-            </div>
+        </div>
+    </div>
 </section>
