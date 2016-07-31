@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using Owin.Security.Providers.LinkedIn;
 using portfolio_annette_arrigucci.Models;
 
 namespace portfolio_annette_arrigucci
@@ -63,6 +64,8 @@ namespace portfolio_annette_arrigucci
                 ClientId = "1026694504687-jeti58on8v4bnb7qagen1knsjfujslpf.apps.googleusercontent.com",
                 ClientSecret = "yPQB40SMUuNxaJCAs5LuRKFL"
             });
+
+            app.UseLinkedInAuthentication("772mm4y63yhkqu", "vmfSDaoTVgjbA2uO");
         }
     }
 }
