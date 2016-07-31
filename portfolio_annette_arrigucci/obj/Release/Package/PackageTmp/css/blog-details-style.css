@@ -2,3 +2,11 @@
 {
     max-width: 100%;
 }
+
+.btn-default
+{
+    color: #fff !important;
+    background-color: #18BC9C !important;
+    font-size: 18px;
+}
+

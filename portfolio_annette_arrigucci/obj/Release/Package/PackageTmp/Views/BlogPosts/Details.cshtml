@@ -2,9 +2,14 @@
 <link href="~/css/blog-details-style.css" rel="stylesheet">
 
 @model portfolio_annette_arrigucci.Models.BlogPost
+@using portfolio_annette_arrigucci.Models
 
 @{
     ViewBag.Title = "Details";
+    ViewBag.postId = Model.Id;
+    var myCommentModel = new Comment();
+    myCommentModel.PostId = Model.Id;
+    myCommentModel.PostSlug = Model.Slug;
 }
 
 <section id="blog-detail">
@@ -27,6 +32,17 @@
                 @if (Model.Updated != null)
                 {
                     <p class="date"><b>Updated: @TimeZoneInfo.ConvertTime((DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+                }
+                @Html.Partial("_ShowComments", (IEnumerable<portfolio_annette_arrigucci.Models.Comment>) Model.Comments)
+                @*If the user is logged in, show the comment form*@
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.Partial("_AddComment", myCommentModel)
+                }
+                @*Otherwise, show a link that will prompt a user to log in*@
+                @if (!Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Log in to comment", "Login", "Account", null, new { @class = "btn btn-default" })
                 }
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }) |

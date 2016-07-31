@@ -54,15 +54,15 @@ namespace portfolio_annette_arrigucci
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1002930456489437",
+               appSecret: "3f46aca0889cf789dbb5f68271eca4c9");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1026694504687-jeti58on8v4bnb7qagen1knsjfujslpf.apps.googleusercontent.com",
+                ClientSecret = "yPQB40SMUuNxaJCAs5LuRKFL"
+            });
         }
     }
 }

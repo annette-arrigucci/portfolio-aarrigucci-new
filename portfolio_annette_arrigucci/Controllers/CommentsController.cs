@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace portfolio_annette_arrigucci.Controllers
 {
+    [RequireHttps]
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
