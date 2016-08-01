@@ -46,7 +46,11 @@
                     @Html.ActionLink("Log in to comment", "Login", "Account", null, new { @class = "btn btn-default" })
                 }
                 <p>
-                    @Html.ActionLink("Edit Post", "Edit", new { slug = Model.Slug }) |
+                     @if (User.IsInRole("Admin"))
+                     {
+                         @Html.ActionLink("Edit Post", "Edit", new { slug = Model.Slug }) 
+                         @Html.Raw(" | ")
+                     }
                     @Html.ActionLink("Back to Index", "Index")
                 </p>
             </div>    
