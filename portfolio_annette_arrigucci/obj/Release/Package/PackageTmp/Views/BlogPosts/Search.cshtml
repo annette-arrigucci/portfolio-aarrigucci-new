@@ -31,11 +31,16 @@
                         <img src="@Html.DisplayFor(modelItem => item.MediaURL)" width="100">
                     }
                     <p>@Html.Raw(item.Preview)</p>
-                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/d/yy h:mm tt")</b></p>
                     <p>
-                        @Html.ActionLink("Edit", "Edit", new { slug = item.Slug }) |
-                        @Html.ActionLink("Details", "Details", new { slug = item.Slug }) |
-                        @Html.ActionLink("Delete", "Delete", new { slug = item.Slug })
+                        @Html.ActionLink("Details", "Details", new { slug = item.Slug })
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Edit", "Edit", new { slug = item.Slug })
+                            @Html.Raw(" | ")
+                            @Html.ActionLink("Delete", "Delete", new { slug = item.Slug })
+                        }
                     </p>
                 }
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

@@ -1,5 +1,6 @@
 ﻿<link href="~/css/page-top-padding.css" rel="stylesheet">
 <link href="~/css/form-style.css" rel="stylesheet">
+<link href="~/css/blog-edit-style.css" rel="stylesheet">
 <script src="~/scripts/tinymce/tinymce.min.js"></script>
 
 
@@ -23,23 +24,11 @@
                 {
                     @Html.AntiForgeryToken()
 
+                    
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @*@Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control", @type = "hidden"} })
-                                @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        @*<div class="form-group">*@
-                            @*@Html.LabelFor(model => model.Updated, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            @*<div class="col-md-10">*@
-                                @*@Html.EditorFor(model => model.Updated, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Updated, "", new { @class = "text-danger" })*@
-                            @*</div>
-                        </div>*@
+                            @Html.HiddenFor(model => model.Created, new { htmlAttributes = new { @class = "form-control"} })
+           
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -48,14 +37,6 @@
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        @*<div class="form-group">*@
-                            @*@Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            @*<div class="col-md-10">*@
-                                @*@Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })*@
-                            @*</div>
-                        </div>*@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -93,8 +74,11 @@
                     </div>
                 }
 
-                <div>
-                    @Html.ActionLink("Back to List", "Index")
+                <div class="col-md-2"></div>
+                <div class="col-lg-4">
+                    <p>
+                        @Html.ActionLink("Back to Index", "Index")
+                    </p>
                 </div>
           </div>
      </div>

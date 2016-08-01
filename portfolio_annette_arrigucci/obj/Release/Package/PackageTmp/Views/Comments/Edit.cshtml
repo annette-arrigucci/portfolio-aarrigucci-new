@@ -2,6 +2,7 @@
 
 <link href="~/css/page-top-padding.css" rel="stylesheet">
 <link href="~/css/edit-comment-style.css" rel="stylesheet">
+<link href="~/css/form-style.css" rel="stylesheet">
 
 <section id="blog-edit">
     <div class="container">
@@ -12,8 +13,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                
+            <div class="col-lg-8 col-lg-offset-2"> 
                 @using (Html.BeginForm("Edit", "Comments", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -25,10 +25,6 @@
                             @Html.HiddenFor(model => model.Created, new { htmlAttributes = new { @class = "form-control"} })
 
                     <dl class="dl-horizontal">
-                        <dt></dt>
-                        <dd>
-                            <p>@Html.ActionLink("View blog post", "Details", "BlogPosts", new { slug = Model.PostSlug }, null)</p>
-                        </dd>
 
                         @if (!string.IsNullOrEmpty(Model.Author.FirstName) && !string.IsNullOrEmpty(Model.Author.LastName))
                         {
@@ -66,7 +62,7 @@
                             <p>@Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-3" })</p>
                         </dt>
                         <dd>
-                            <p>@TimeZoneInfo.ConvertTime(Model.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</p>
+                            <p>@TimeZoneInfo.ConvertTime(Model.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/d/yy h:mm tt")</p>
                         </dd>
 
                         @if (Model.Updated != null)
@@ -74,9 +70,9 @@
                             <dt>
                                 <p>@Html.LabelFor(model => model.Updated, "Last Updated", htmlAttributes: new { @class = "control-label col-md-3" })</p>
                             </dt>
-                                    <dd>
-                                        <p>@TimeZoneInfo.ConvertTime((System.DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</p>
-                                    </dd>
+                            <dd>
+                                <p>@TimeZoneInfo.ConvertTime((System.DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/d/yy h:mm tt")</p>
+                            </dd>
                         }
 
                         <dt>
@@ -91,13 +87,15 @@
                         <dd>
                             <input type="submit" value="Save" class="btn btn-default" />
                         </dd>
-                    </dl>
-                  }
 
-                        <div>
-                            @Html.ActionLink("Back to List", "Index")
-                        </div>
-                </div>
+                        <dt></dt>
+                        <dd>
+                            <p>@Html.ActionLink("Back to blog post", "Details", "BlogPosts", new { slug = Model.PostSlug }, null)</p>
+                        </dd>
+                    </dl>
+
+                }          
+             </div>
         </div>
     </div>
 </section>

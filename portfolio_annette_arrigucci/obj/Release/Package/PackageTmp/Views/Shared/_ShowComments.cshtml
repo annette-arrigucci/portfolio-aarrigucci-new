@@ -8,7 +8,7 @@
         if(!string.IsNullOrEmpty(item.AuthorId)) {
             <p><b>Posted by @item.Author.DisplayName</b></p>
         }
-        <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+        <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/d/yy h:mm tt")</b></p>
         if (User.IsInRole("Moderator") || User.IsInRole("Admin"))
         {
             <p>

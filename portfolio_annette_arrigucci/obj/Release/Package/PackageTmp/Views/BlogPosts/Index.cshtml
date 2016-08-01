@@ -58,7 +58,7 @@
                         <img src="@Html.DisplayFor(modelItem => item.MediaURL)" width="100">
                     }
                     <p>@Html.Raw(item.Preview)</p>
-                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</b></p>
+                    <p class="date"><b>@TimeZoneInfo.ConvertTime(item.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/d/yy h:mm tt")</b></p>
                         <p>
                             @Html.ActionLink("Details", "Details", new { slug = item.Slug })
                             @if (User.IsInRole("Admin"))
