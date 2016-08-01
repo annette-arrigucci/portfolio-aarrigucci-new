@@ -23,11 +23,28 @@
                         <p>@Html.ActionLink("View blog post", "Details", "BlogPosts", new { slug = Model.PostSlug }, null)</p>
                     </dd>
 
+                    @if (!string.IsNullOrEmpty(Model.Author.FirstName) && !string.IsNullOrEmpty(Model.Author.LastName))
+                    {
+                        <dt>
+                            <p>@Html.LabelFor(model => model.Author.FirstName, "Author Name")</p>
+                        </dt>
+                        <dd>
+                            <p>@Model.Author.FirstName&nbsp;@Model.Author.LastName</p>
+                        </dd>
+                    }
+
                     <dt>
-                        <p>@Html.LabelFor(model => model.Author.FirstName, "Author")</p>
+                        <p>@Html.LabelFor(model => model.Author.DisplayName, "Display Name")</p>
                     </dt>
                     <dd>
-                        <p>@Model.Author.FirstName&nbsp;@Model.Author.LastName</p>
+                        <p>@Model.Author.DisplayName</p>
+                    </dd>
+
+                    <dt>
+                        <p>@Html.LabelFor(model => model.Author.Email, "Author Email")</p>
+                    </dt>
+                    <dd>
+                        <p>@Model.Author.Email</p>
                     </dd>
 
                     <dt>

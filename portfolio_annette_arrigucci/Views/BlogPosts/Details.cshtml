@@ -1,5 +1,6 @@
 ﻿<link href="~/css/page-top-padding.css" rel="stylesheet">
 <link href="~/css/blog-details-style.css" rel="stylesheet">
+<link href="~/css/form-style.css" rel="stylesheet">
 
 @model portfolio_annette_arrigucci.Models.BlogPost
 @using portfolio_annette_arrigucci.Models
@@ -45,73 +46,10 @@
                     @Html.ActionLink("Log in to comment", "Login", "Account", null, new { @class = "btn btn-default" })
                 }
                 <p>
-                    @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }) |
-                    @Html.ActionLink("Back to List", "Index")
+                    @Html.ActionLink("Edit Post", "Edit", new { slug = Model.Slug }) |
+                    @Html.ActionLink("Back to Index", "Index")
                 </p>
-            </div>
-
-
-            @*<div>
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Created)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Created)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Updated)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Updated)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Title)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Title)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Slug)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Slug)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Body)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Body)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.MediaURL)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.MediaURL)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Published)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Published)
-                        </dd>
-
-                    </dl>
-                </div>*@
-            
+            </div>    
         </div>
     </div>
 </section>

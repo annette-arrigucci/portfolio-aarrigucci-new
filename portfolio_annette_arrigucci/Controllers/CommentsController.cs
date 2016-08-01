@@ -141,7 +141,7 @@ namespace portfolio_annette_arrigucci.Controllers
             Comment comment = db.Comments.Find(id);
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "BlogPosts");
         }
 
         protected override void Dispose(bool disposing)

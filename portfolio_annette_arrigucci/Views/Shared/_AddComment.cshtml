@@ -18,7 +18,6 @@
                 <input name="PostSlug" value="@Model.PostSlug" type="hidden" />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-8">
                     <!---Added a hard-coded input here to fix styling of the textarea - width is set by form-control class to 100%-->
                     @*<textarea data-val="true" data-val-required="Body cannot be empty" id="Body" name="Body" class="form-control" rows="4"></textarea>*@
@@ -28,7 +27,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>

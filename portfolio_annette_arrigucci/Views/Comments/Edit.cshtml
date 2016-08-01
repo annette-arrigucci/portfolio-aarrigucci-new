@@ -2,6 +2,7 @@
 
 <link href="~/css/page-top-padding.css" rel="stylesheet">
 <link href="~/css/edit-comment-style.css" rel="stylesheet">
+<link href="~/css/form-style.css" rel="stylesheet">
 
 <section id="blog-edit">
     <div class="container">
@@ -21,20 +22,37 @@
                             @Html.HiddenFor(model => model.Id)
                             @Html.HiddenFor(model => model.PostId, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.HiddenFor(model => model.PostSlug, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.HiddenFor(model => model.AuthorId, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.HiddenFor(model => model.Created, new { htmlAttributes = new { @class = "form-control"} })
 
-        
                     <dl class="dl-horizontal">
                         <dt></dt>
                         <dd>
                             <p>@Html.ActionLink("View blog post", "Details", "BlogPosts", new { slug = Model.PostSlug }, null)</p>
                         </dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Author.FirstName) && !string.IsNullOrEmpty(Model.Author.LastName))
+                        {
+                            <dt>
+                                <p>@Html.LabelFor(model => model.Author.FirstName, "Author Name", htmlAttributes: new { @class = "control-label col-md-3" })</p>
+                            </dt>
+                            <dd>
+                                <p>@Model.Author.FirstName&nbsp;@Model.Author.LastName</p>
+                            </dd>
+                        }
+
                         <dt>
-                            <p>@Html.LabelFor(model => model.AuthorId, "Author", htmlAttributes: new { @class = "control-label col-md-3" })</p>
+                            <p>@Html.LabelFor(model => model.Author.DisplayName, "Display Name", htmlAttributes: new { @class = "control-label col-md-5" })</p>
                         </dt>
                         <dd>
-                           <p>@Model.Author.FirstName&nbsp;@Model.Author.LastName</p>
-                            @Html.EditorFor(model => model.AuthorId, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
-                            @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
+                            <p>@Model.Author.DisplayName</p>
+                        </dd>
+
+                        <dt>
+                            <p>@Html.LabelFor(model => model.Author.Email, "Author Email", htmlAttributes: new { @class = "control-label col-md-3" })</p>
+                        </dt>
+                        <dd>
+                            <p>@Model.Author.Email</p>
                         </dd>
 
                         <dt>
@@ -50,8 +68,6 @@
                         </dt>
                         <dd>
                             <p>@TimeZoneInfo.ConvertTime(Model.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</p>
-                            @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
-                            @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
                         </dd>
 
                         @if (Model.Updated != null)
