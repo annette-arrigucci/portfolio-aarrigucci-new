@@ -18,11 +18,6 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <dl class="dl-horizontal">
-                    <dt></dt>
-                    <dd>
-                        <p>@Html.ActionLink("View blog post", "Details", "BlogPosts", new { slug = Model.PostSlug }, null)</p>
-                    </dd>
-
                     @if (!string.IsNullOrEmpty(Model.Author.FirstName) && !string.IsNullOrEmpty(Model.Author.LastName))
                     {
                         <dt>
@@ -58,7 +53,7 @@
                         <p>@Html.DisplayNameFor(model => model.Created)</p>
                     </dt>
                     <dd>
-                        <p>@TimeZoneInfo.ConvertTime(Model.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</p>
+                        <p>@TimeZoneInfo.ConvertTime(Model.Created, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/d/yy h:mm tt")</p>
                     </dd>
 
                     @if (Model.Updated != null)
@@ -67,7 +62,7 @@
                             <p>@Html.LabelFor(model => model.Updated, "Last Updated")</p>
                         </dt>
                         <dd>
-                            <p>@TimeZoneInfo.ConvertTime((System.DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/dd/yy h:mm tt")</p>
+                            <p>@TimeZoneInfo.ConvertTime((System.DateTimeOffset)Model.Updated, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString("M/d/yy h:mm tt")</p>
                         </dd>
                     }
                     @if (!string.IsNullOrEmpty(Model.UpdateReason))
@@ -79,22 +74,23 @@
                             <p>@Html.DisplayFor(model => model.UpdateReason)</p>
                         </dd>
                     }
-                </dl>
 
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <div class="form-group">
-                    <div class="col-md-offset-3 col-md-9 no-color">
-                        <div class="form-actions">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <dt></dt>
+                                @*<div class="form-actions">*@
+                        <dd>
                             <input type="submit" value="Confirm Delete" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
-            }
-            <div>
-                 @Html.ActionLink("Back to Comments Index", "Index")
-            </div>
+                        </dd>                   
+                             @*</div>*@
+                    }
+                    <dt></dt>
+                    <dd>
+                        <p>@Html.ActionLink("View blog post", "Details", "BlogPosts", new { slug = Model.PostSlug }, null)</p>
+                    </dd>
+                </dl>
             </div>
         </div>
     </div>
