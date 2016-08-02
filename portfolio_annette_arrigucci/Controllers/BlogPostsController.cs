@@ -122,8 +122,8 @@ namespace portfolio_annette_arrigucci.Controllers
             return View(blogPost);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult Search(string searchStr, int? page)
         {
             if (string.IsNullOrEmpty(searchStr))

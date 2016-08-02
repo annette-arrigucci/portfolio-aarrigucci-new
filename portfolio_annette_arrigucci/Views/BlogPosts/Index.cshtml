@@ -36,9 +36,9 @@
                 <div class="col-lg-5 col-lg-offset-2"></div>
             }
 
-            @using (Html.BeginForm("Search", "BlogPosts", FormMethod.Post))
+            @using (Html.BeginForm("Search", "BlogPosts", FormMethod.Get))
             {
-                @Html.AntiForgeryToken()
+                @*@Html.AntiForgeryToken()*@
                 <div class="col-lg-3">
                     <input name="searchStr" type="text" class="form-control" id="searchStr" />
                 </div>

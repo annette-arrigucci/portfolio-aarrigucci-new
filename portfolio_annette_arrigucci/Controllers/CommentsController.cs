@@ -59,7 +59,7 @@ namespace portfolio_annette_arrigucci.Controllers
         public ActionResult Create([Bind(Include = "Id,PostId,PostSlug,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
         {
             if (string.IsNullOrEmpty(comment.Body))
-            {  //check the file name to make sure its an image                 
+            {             
                 ModelState.AddModelError("Body", "Body is empty");
             }
 
