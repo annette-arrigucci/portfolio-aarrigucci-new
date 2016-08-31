@@ -230,3 +230,9 @@ C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\Owin.Se
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\Owin.Security.Providers.Xing.dll
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\Owin.Security.Providers.Yahoo.dll
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\Owin.Security.Providers.Yammer.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGrid.CSharp.HTTP.Client.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGrid.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGrid.SmtpApi.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGridMail.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\System.Net.Http.Formatting.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\System.Net.Http.Formatting.xml

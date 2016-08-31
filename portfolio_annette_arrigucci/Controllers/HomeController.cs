@@ -45,7 +45,7 @@ namespace portfolio_annette_arrigucci.Controllers
             var svc = new EmailService();
             var msg = new IdentityMessage();
             msg.Subject = "Contact From Portfolio Site";
-            msg.Body = "\r\n You have recieved a request to contact from " + newContact + "(" + contact.Email + ")" + "\r\n"
+            msg.Body = "\r\n You have received a request to contact from " + newContact + "(" + contact.Email + ")" + "\r\n"
                          + "\r\n With the following message: \r\n\t"
                          + contact.Message;
             msg.Destination = /*contact.Email*/"annette.arrigucci@gmail.com";
