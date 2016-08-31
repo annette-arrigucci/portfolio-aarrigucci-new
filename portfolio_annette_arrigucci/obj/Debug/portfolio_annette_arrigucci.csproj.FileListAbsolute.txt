@@ -395,4 +395,10 @@ C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\Microso
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\obj\Debug\portfolio_annette_arrigucci.dll
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\obj\Debug\portfolio_annette_arrigucci.pdb
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGrid.CSharp.HTTP.Client.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGrid.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGrid.SmtpApi.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\SendGridMail.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\System.Net.Http.Formatting.dll
+C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\bin\System.Net.Http.Formatting.xml
 C:\Users\Me\Desktop\portfolio_aarrigucci\portfolio_annette_arrigucci\obj\Debug\portfolio_annette_arrigucci.csprojResolveAssemblyReference.cache

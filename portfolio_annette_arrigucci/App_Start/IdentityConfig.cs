@@ -11,6 +11,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using portfolio_annette_arrigucci.Models;
+using System.Configuration;
+using SendGrid;
+using SendGrid.CSharp.HTTP.Client;
+using System.Net.Http;
+using System.Net.Mail;
 
 namespace portfolio_annette_arrigucci
 {
@@ -19,6 +24,20 @@ namespace portfolio_annette_arrigucci
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            var apiKey = ConfigurationManager.AppSettings["SendGridAPIKey"];
+            var from = ConfigurationManager.AppSettings["ContactEmail"];
+
+            SendGridMessage myMessage = new SendGridMessage();
+            myMessage.AddTo(message.Destination);
+            myMessage.From = new MailAddress(from);
+            myMessage.Subject = message.Subject;
+            myMessage.Html = message.Body;
+
+            //Create a Web transport, using API Key
+            var transportWeb = new Web(ConfigurationManager.AppSettings["SendGridAPIKey"]);
+            //Send the email
+            transportWeb.DeliverAsync(myMessage);
+
             return Task.FromResult(0);
         }
     }

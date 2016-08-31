@@ -4,6 +4,8 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
+private.config
+web.config
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
